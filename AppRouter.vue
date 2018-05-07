@@ -6,12 +6,10 @@
 <script>
 
 	import {listen} from './history'
-	import HomePage from "./HomePage"
-	import ArticlesPage from "./ArticlesPage"
 
 	const routes = {
-		"/": HomePage,
-		"/articles": ArticlesPage
+		"/": () => import('./Home'),
+		"/articles": () => import('./Articles')
 	};
 
 	export default {
