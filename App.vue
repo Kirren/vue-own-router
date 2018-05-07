@@ -7,15 +7,18 @@
 </template>
 
 <script>
-    import AppRouter from './AppRouter'
+    import Router from './Router'
+    import { push } from './history'
 
     export default {
         components: {
-            AppRouter
+            Router
         },
         methods: {
             goTo(route) {
-                window.location = route
+                // 1. window.location = route
+                // 2. history.pushState(null, null, route)
+                push(route)
             }
         }
     }

@@ -4,8 +4,10 @@
 </template>
 
 <script>
-	import HomePage from "./HomePage";
-	import ArticlesPage from "./ArticlesPage";
+
+	import {listen} from './history'
+	import HomePage from "./HomePage"
+	import ArticlesPage from "./ArticlesPage"
 
 	const routes = {
 		"/": HomePage,
@@ -14,12 +16,21 @@
 
 	export default {
 		data() {
-			return { current: window.location.pathname };
+			return {current: window.location.pathname}
 		},
 		computed: {
 			routedComponent() {
-				return routes[this.current];
+				return routes[this.current]
 			}
+		},
+		created() {
+			listen((route, previousRoute) => {
+				this.current = route
+			})
+			window.addEventListener(
+				'popstate',
+				event => (this.current = window.location.pathname)
+			)
 		}
-	};
+	}
 </script>
